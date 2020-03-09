@@ -1,0 +1,11 @@
+PROGRAM test2(INPUT, OUTPUT);
+VAR
+  Ch: CHAR;
+BEGIN
+  READ(Ch);
+  WRITELN(Ch);
+  RESET(INPUT);
+  READ(Ch);
+  READ(Ch);
+  WRITELN(Ch)
+END.

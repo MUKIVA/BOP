@@ -1,0 +1,16 @@
+[Project]
+FileName=C:\FPC\Lw15\153\153.dp
+Name=153
+MainUnit=C:\FPC\Lw15\153\Queue.pas
+UnitCount=2
+ResFiles=
+NoConsole=0
+IsDll=0
+Icon=C:\dev_gpc\Icon\Mainicon.ico
+[Unit2]
+FileName=C:\FPC\Lw15\153\153.pas
+FileTime=1347992349
+[Unit1]
+FileName=C:\FPC\Lw15\153\Queue.pas
+[Unit3]
+FileTime=1347992343

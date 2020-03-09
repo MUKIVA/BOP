@@ -1,0 +1,4 @@
+PROGRAM Hello(INPUT, OUTPUT);
+BEGIN
+  WRITELN("Hello World!")
+END.

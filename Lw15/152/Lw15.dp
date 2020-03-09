@@ -1,0 +1,17 @@
+[Project]
+FileName=C:\FPC\Lw15\152\Lw15.dp
+Name=Lw15
+MainUnit=C:\FPC\Lw15\152\Lw15.pas
+UnitCount=2
+ResFiles=
+NoConsole=0
+IsDll=0
+Icon=C:\dev_gpc\Icon\Mainicon.ico
+[Unit1]
+FileName=C:\FPC\Lw15\152\Lw15.pas
+FileTime=1347991170
+[Unit2]
+FileName=C:\FPC\Lw15\152\Count3.pas
+FileTime=1347991688
+[Unit0]
+FileName=C:\FPC\Lw15\Count3.pas
