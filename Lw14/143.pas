@@ -80,7 +80,9 @@ VAR
   Ch: CHAR;
 BEGIN {RecursiveSort}
   RESET(F1);
-  READ(F1, Ch);
+  IF NOT EOLN(F1)
+  THEN
+    READ(F1, Ch);
   IF NOT EOLN(F1)
   THEN {Фаил имеет как минимум 2 символа}
     BEGIN
@@ -90,7 +92,7 @@ BEGIN {RecursiveSort}
       Merge(F1, F2, F3);
       RESET(F1);
       READ(F1, Ch);
-      WHILE NOT EOLN(INPUT)
+      WHILE NOT EOLN(F1)
       DO
       BEGIN
         WRITELN(OUTPUT, Ch);

@@ -1,0 +1,28 @@
+PROGRAM SarahRevere(INPUT, OUTPUT);
+VAR
+  W1, W2, W3, W4: CHAR;
+  Looking, Land, Sea: BOOLEAN;
+BEGIN {SarahRevere}  
+  {Инициализация}
+  W1 := ' ';
+  W2 := ' ';
+  W3 := ' ';
+  W4 := ' ';
+  Land := FALSE;
+  Sea := FALSE;
+  Looking := TRUE;
+  WHILE Looking AND NOT (Land OR Sea)  
+  DO
+    BEGIN
+      {движение окна}
+      W1 := W2;
+      W2 := W3;
+      W3 := W4;
+      READ(W4);
+      WRITELN(W1, W2, W3, W4);
+      {проверка окна на land}
+      {проверка окна на sea}
+      Looking := W4 <> '#'
+    END;
+  {создание сообщения Sarah}
+END.  {SarahRevere}

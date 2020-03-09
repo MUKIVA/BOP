@@ -1,0 +1,15 @@
+[Project]
+FileName=C:\GitHub\-BOP\Lw16\Task1\161.dp
+Name=161
+MainUnit=C:\GitHub\-BOP\Lw16\Task1\161.pas
+UnitCount=2
+ResFiles=
+NoConsole=0
+IsDll=0
+Icon=C:\dev_gpc\Icon\Mainicon.ico
+[Unit1]
+FileName=C:\GitHub\-BOP\Lw16\Task1\161.pas
+FileTime=1349101282
+[Unit2]
+FileName=C:\GitHub\-BOP\Lw16\Task1\DateIO.pas
+FileTime=1349100924
