@@ -12,7 +12,7 @@ BEGIN {Lexico}
   RESET(F1);
   RESET(F2);
   Result := '0';
-  WHILE (NOT EOLN(F1)) AND (NOT EOLN(F2)) AND (Result = '0')
+  WHILE (NOT EOLN(F1)) OR (NOT EOLN(F2)) AND (Result = '0')
   DO
     BEGIN{WHILE}
       READ(F1, Ch1);
