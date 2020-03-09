@@ -19,7 +19,7 @@ BEGIN {CopyFile}
   WRITELN(F2)
 END; {CopyFile}
 PROCEDURE CopySort(VAR F1, F2: TEXT);
-  { Копирует и сортирует из F1 в F2}
+  { Копирует с сортировкой из F1 в F2}
 VAR
   Ch1, Ch2: CHAR;
 BEGIN  {CopySort}
@@ -33,15 +33,18 @@ BEGIN  {CopySort}
       THEN
         BEGIN
           WRITE(F2, Ch1);
+          WRITE(OUTPUT, Ch1);
           Ch1 := Ch2;
         END
       ELSE
         BEGIN
           WRITE(F2, Ch2);
-          Sorted := 'N'
+          WRITE(OUTPUT, Ch2);
+          Sorted := 'Y'
         END
     END;
-  WRITELN(F2, Ch1)
+  WRITELN(F2, Ch1);
+  WRITELN(OUTPUT, Ch1)
 END; {CopySort}
 BEGIN { BubbleSort }
   CopyFile(INPUT, F1); { Копируем INPUT в F1 }
@@ -51,9 +54,8 @@ BEGIN { BubbleSort }
     BEGIN
       RESET(F1);
       REWRITE(F2);
-      CopySort(F1, F2);{ Копируем F1 в F2,проверяя отсортированность и переставляя первые соседние символы по порядку}
-      CopyFile(F2, F1){ Копируем F2 в F1 }
-    END;
-  CopyFile(F1, OUTPUT)  { Копируем F1 в OUTPUT }
+      CopySort(F1, F2){ Копируем F1 в F2,проверяя отсортированность и переставляя первые соседние символы по порядку}
+      { Копируем F2 в F1 }
+    END
+  { Копируем F1 в OUTPUT }
 END.{ BubbleSort }
-
