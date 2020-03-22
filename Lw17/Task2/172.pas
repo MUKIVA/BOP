@@ -9,10 +9,8 @@ BEGIN {ReadDigit}
   D := -1;
   IF NOT EOLN(F)
   THEN
-    READ(Ch);
-  IF ((Ch >= '0') AND (Ch <= '9'))
-  THEN
     BEGIN 
+      READ(Ch);
       IF Ch = '0' THEN D := 0 ELSE
       IF Ch = '1' THEN D := 1 ELSE
       IF Ch = '2' THEN D := 2 ELSE

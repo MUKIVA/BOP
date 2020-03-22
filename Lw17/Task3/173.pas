@@ -1,6 +1,6 @@
 PROGRAM Stat(INPUT, OUTPUT);
 VAR
-  Min, Max, Int, Sum, Num: INTEGER;
+  Min, Max, Count, Sum, Num: INTEGER;
 PROCEDURE ReadDigit(VAR F: TEXT; VAR D: INTEGER);
 VAR
   Ch: CHAR;
@@ -48,16 +48,15 @@ END; {ReadNumber}
 BEGIN {TestReadNumber}
   Min := MAXINT DIV 10;
   Max := 0;
-  Int := 0;
+  Count := 0;
   Sum := 0;
   Num := 0; 
-  WHILE NOT EOLN(INPUT) AND ((Sum + Num <= MAXINT DIV 10) AND (Int + 1 <= MAXINT DIV 10)) AND (Num <> -1)
+  WHILE NOT EOLN(INPUT) AND ((Sum + Num <= MAXINT DIV 10) AND (Count + 1 <= MAXINT DIV 10)) AND (Num <> -1)
   DO
     BEGIN
       ReadNumber(INPUT, Num);
-      WRITELN(Num);
       Sum := Sum + Num;
-      Int := Int + 1;  
+      Count := Count + 1;  
       IF Min > Num
       THEN
         Min := Num;
@@ -65,13 +64,14 @@ BEGIN {TestReadNumber}
       THEN
         Max := Num;
     END;
-  IF (Sum > MAXINT DIV 10) AND (Int > MAXINT DIV 10)
+  IF (Sum > MAXINT DIV 10) AND (Count > MAXINT DIV 10) OR (Count = 0) OR (Sum = 0)
   THEN
-    WRITELN('Переполнение')
+    WRITELN('Переполнение или в строке нет ни одной цифры')
   ELSE
     BEGIN
       WRITELN('Максимальное число: ', Max);
       WRITELN('Минимальное число: ', Min);
-      WRITE('Среднее арифметическое: ', Sum DIV Int, '.', Sum MOD Int)
+      Sum := (Sum * 100) DIV Count;
+      WRITE('Среднее арифметическое: ', Sum DIV 100, '.', Sum MOD 100)     
     END    
 END. {TestReadNumber}
