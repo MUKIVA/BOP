@@ -34,15 +34,13 @@ BEGIN {ReadNumber}
   DO
     BEGIN
       ReadDigit(F, I);
-      IF ((N * 10 + I) <= (MAXINT DIV 100))
+      IF ((N < MAXINT DIV 10) OR ((N = MAXINT DIV 10) AND (I < MAXINT MOD 10))) AND (I <> -1)
       THEN
-        BEGIN
-          IF I <> -1
-          THEN
-            N := N * 10 + I
-        END
+        N := N * 10 + I
       ELSE
-        N := -1
+        IF (N > MAXINT DIV 10)
+        THEN
+          N := -1
     END
 END; {ReadNumber}
 BEGIN {TestReadNumber}
