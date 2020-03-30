@@ -9,7 +9,7 @@ BEGIN {ReadDigit}
   D := -1;
   IF NOT EOLN(F)
   THEN
-    BEGIN
+    BEGIN 
       READ(Ch);
       IF Ch = '0' THEN D := 0 ELSE
       IF Ch = '1' THEN D := 1 ELSE
@@ -20,7 +20,7 @@ BEGIN {ReadDigit}
       IF Ch = '6' THEN D := 6 ELSE
       IF Ch = '7' THEN D := 7 ELSE
       IF Ch = '8' THEN D := 8 ELSE
-      IF Ch = '9' THEN D := 9  
+      IF Ch = '9' THEN D := 3 
     END
 END; {ReadDigit}
 BEGIN {TestReadDigit}
@@ -29,11 +29,10 @@ BEGIN {TestReadDigit}
   WHILE (NOT EOLN(INPUT)) AND (Digit <> -1)   
   DO
     BEGIN 
-      Sum := Sum + Digit;  
-      ReadDigit(INPUT, Digit)
+      ReadDigit(INPUT, Digit);
+      IF Digit <> -1
+      THEN 
+        Sum := Sum + Digit 
     END;
-  IF Digit <> -1
-  THEN
-    Sum := Sum + Digit;
   WRITELN(Sum)
 END. {TestReadDigit}

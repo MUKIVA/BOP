@@ -34,7 +34,7 @@ BEGIN {ReadNumber}
   DO
     BEGIN
       ReadDigit(F, I);
-      IF ((N * 10 + I) <= (MAXINT DIV 10))
+      IF ((N * 10 + I) <= (MAXINT DIV 100))
       THEN
         BEGIN
           IF I <> -1
@@ -51,7 +51,7 @@ BEGIN {TestReadNumber}
   Count := 0;
   Sum := 0;
   Num := 0; 
-  WHILE NOT EOLN(INPUT) AND ((Sum + Num <= MAXINT DIV 10) AND (Count + 1 <= MAXINT DIV 10)) AND (Num <> -1)
+  WHILE NOT EOLN(INPUT) AND ((Sum + Num <= MAXINT DIV 100) AND (Count + 1 <= MAXINT DIV 100)) AND (Num <> -1)
   DO
     BEGIN
       ReadNumber(INPUT, Num);
@@ -64,7 +64,7 @@ BEGIN {TestReadNumber}
       THEN
         Max := Num;
     END;
-  IF (Sum > MAXINT DIV 10) AND (Count > MAXINT DIV 10) OR (Count = 0) OR (Sum = 0)
+  IF (Sum > MAXINT DIV 100) AND (Count > MAXINT DIV 100) OR (Count = 0) OR (Sum = 0)  OR (Num = -1)
   THEN
     WRITELN('Переполнение или в строке нет ни одной цифры')
   ELSE
