@@ -30,7 +30,7 @@ VAR
 BEGIN {ReadNumber}
   N := 0;
   I := 0;
-  WHILE (NOT EOLN(F)) AND (I <> -1) AND (N <> -1)
+  WHILE (I <> -1) AND (N <> -1)
   DO
     BEGIN
       ReadDigit(F, I);

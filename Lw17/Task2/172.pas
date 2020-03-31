@@ -20,7 +20,7 @@ BEGIN {ReadDigit}
       IF Ch = '6' THEN D := 6 ELSE
       IF Ch = '7' THEN D := 7 ELSE
       IF Ch = '8' THEN D := 8 ELSE
-      IF Ch = '9' THEN D := 3 
+      IF Ch = '9' THEN D := 9 
     END
 END; {ReadDigit}
 PROCEDURE ReadNumber(VAR F: TEXT; VAR N: INTEGER);
@@ -30,7 +30,7 @@ VAR
 BEGIN {ReadNumber}
   N := 0;
   I := 0;
-  WHILE (NOT EOLN(F)) AND (I <> -1) AND (N <> -1)
+  WHILE (I <> -1) AND (N <> -1)
   DO
     BEGIN
       ReadDigit(F, I);

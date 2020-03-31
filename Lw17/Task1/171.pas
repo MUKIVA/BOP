@@ -20,13 +20,13 @@ BEGIN {ReadDigit}
       IF Ch = '6' THEN D := 6 ELSE
       IF Ch = '7' THEN D := 7 ELSE
       IF Ch = '8' THEN D := 8 ELSE
-      IF Ch = '9' THEN D := 3 
+      IF Ch = '9' THEN D := 9 
     END
 END; {ReadDigit}
 BEGIN {TestReadDigit}
   Sum := 0;
   Digit := 0;
-  WHILE (NOT EOLN(INPUT)) AND (Digit <> -1)   
+  WHILE Digit <> -1   
   DO
     BEGIN 
       ReadDigit(INPUT, Digit);
