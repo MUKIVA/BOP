@@ -9,56 +9,57 @@ VAR
   Student: 1 .. ClassSize;
   NextScore: Score;
   Ave, TotalScore, ClassTotal: INTEGER;
-  FatalError: BOOLEAN;
-PROCEDURE WriteName(VAR InF:TEXT);
+  FileOfName: TEXT;
+  FatalError, IsNotName: BOOLEAN;
+PROCEDURE CopyName(VAR InF: TEXT; VAR NameF: TEXT);
 VAR
   Ch: CHAR;
-  IsNotName: BOOLEAN;
-  FileOfName: TEXT;
-BEGIN {WriteName}
-  IsNotName := FALSE;
-  REWRITE(FileOFName);
-  IF (NOT EOLN(InF))
+BEGIN { CopyName }
+  RESET(InF);
+  REWRITE(NameF);
+  IF NOT EOLN(InF)
   THEN
-    READ(InF, Ch);    
-  WHILE (NOT EOLN(InF)) AND (Ch = ' ')
+    READ(InF, Ch);
+  WHILE Ch = ' '
   DO
     READ(InF, Ch);
-  WHILE (NOT EOLN(InF)) AND (Ch <> ' ') AND NOT(IsNotName)
+  WHILE (Ch <> ' ') AND (NOT EOLN(InF))
   DO
     BEGIN
-      WRITE(FileOfName, Ch);
-      READ(InF, Ch);
-      IsNotName := (Ch >= '0') AND (Ch <= '9')
+      WRITE(NameF, Ch);
+      READ(InF, Ch)
     END;
-  WRITELN(FileOfName);
-  RESET(FileOfName);
-  IF NOT(IsNotName)
-  THEN
+  WRITE(NameF, Ch)       
+END; { CopyName }
+PROCEDURE CheckName(VAR NameF: TEXT; VAR IsNotName: BOOLEAN);
+VAR
+  Ch: CHAR;
+BEGIN {CheckName}
+  IsNotName := FALSE;
+  RESET(NameF);
+  WHILE (NOT EOLN(NameF)) AND NOT(IsNotName)
+  DO
     BEGIN
-      WHILE NOT EOLN(FileOfName)
-      DO
-        BEGIN
-          READ(FileOfName, Ch);
-          WRITE(OUTPUT, Ch)
-        END;
-      WRITE(' ')  
+      READ(NameF, Ch);
+      IsNotName := ((Ch >= '0') AND (Ch <= '9'));
     END
-  ELSE
-    WRITE('Некорректное имя ')
-END; {WriteName}
+END; {CheckName}
 BEGIN {AverageScore}
   ClassTotal := 0;
   WRITELN('Student averages:');
   Student := 1;
+  IsNotName := FALSE;
   FatalError := FALSE;
-  WHILE (Student <= ClassSize) AND NOT(FatalError)
+  WHILE (Student <= ClassSize) AND NOT(FatalError) AND NOT(IsNotName)
   DO 
     BEGIN
       TotalScore := 0;
       WhichScore := 1;
-      WriteName(INPUT);
-      WHILE (WhichScore <= NumberOfScores) AND NOT(FatalError)
+      {Копирование из INP в FileOfName имени}
+      CopyName(INPUT, FileOfName);
+      {Проверка имени на корректность}
+      CheckName(FileOfName, IsNotName);
+      WHILE (WhichScore <= NumberOfScores) AND NOT(FatalError) AND NOT(IsNotName)
       DO
         BEGIN
           IF NOT EOLN
@@ -70,11 +71,13 @@ BEGIN {AverageScore}
           WhichScore := WhichScore + 1;
         END;
       READLN;  
-      IF NOT(FatalError)
+      IF NOT(FatalError) AND NOT(IsNotName)
       THEN
         BEGIN
           TotalScore := TotalScore * 10;
           Ave := TotalScore DIV NumberOfScores;
+          {Вывод имени из FileOfName в OUTPUT}
+          CopyName(FileOfName, OUTPUT);
           IF Ave MOD 10 >= 5
           THEN
             WRITELN(Ave DIV 10 + 1)
@@ -85,7 +88,7 @@ BEGIN {AverageScore}
         END  
     END;
   WRITELN;
-  IF NOT(FatalError)
+  IF NOT(FatalError) AND NOT(IsNotName)
   THEN
     BEGIN
       WRITELN ('Class average:');
