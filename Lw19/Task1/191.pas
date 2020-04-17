@@ -2,15 +2,31 @@ PROGRAM Prime(INPUT, OUTPUT);
 CONST
   MinNum = 2;
   MaxNum = 100;
+TYPE
+  Bunch = SET OF MinNum .. MaxNum;
 VAR
-  BunchOfNumber: SET OF MinNum .. MaxNum;
-  CurrentNumber, DelNum: INTEGER;  
+  BunchOfNumber: Bunch;
+  CurrentNumber, DelNum: INTEGER;
+PROCEDURE WriteBunch(VAR Bun: Bunch);
+VAR
+  CurrNum: INTEGER;
+BEGIN {WriteBunch}
+  CurrNum := 2;
+  WHILE CurrNum <= MaxNum
+  DO
+    BEGIN
+      IF CurrNum IN Bun
+      THEN
+        WRITE(CurrNum, ' ');
+      CurrNum := CurrNum + 1
+    END
+END; {WriteBunch}  
 BEGIN {Prime}
  BunchOfNumber := [MinNum .. MaxNum];
  DelNum := 2;
  CurrentNumber := 2;
  WRITE('Простые числа в диапазоне до 100 будут: ');
- WHILE BunchOfNumber <> []
+ WHILE CurrentNumber <= 10
  DO
    BEGIN 
      IF CurrentNumber IN BunchOfNumber
@@ -28,5 +44,6 @@ BEGIN {Prime}
        END;
      CurrentNumber := CurrentNumber + 1;
      DelNum := CurrentNumber; 
-   END
+   END;
+   WriteBunch(BunchOfNumber)
 END. {Prime}
