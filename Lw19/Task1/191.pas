@@ -10,7 +10,7 @@ BEGIN {Prime}
  DelNum := 2;
  CurrentNumber := 2;
  WRITE('Простые числа в диапазоне до 100 будут: ');
- WHILE CurrentNumber <= MaxNum
+ WHILE BunchOfNumber <> []
  DO
    BEGIN 
      IF CurrentNumber IN BunchOfNumber
