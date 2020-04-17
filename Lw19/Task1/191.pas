@@ -9,7 +9,7 @@ BEGIN {Prime}
  BunchOfNumber := [MinNum .. MaxNum];
  DelNum := 2;
  CurrentNumber := 2;
- WRITE('РџСЂРѕСЃС‚С‹Рµ С‡РёСЃР»РІ РІ РґРёР°РїР°Р·РѕРЅРµ РґРѕ 100 Р±СѓРґСѓС‚: ');
+ WRITE('Простые числа в диапазоне до 100 будут: ');
  WHILE CurrentNumber <= MaxNum
  DO
    BEGIN 
