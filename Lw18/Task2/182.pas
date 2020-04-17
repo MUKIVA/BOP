@@ -8,9 +8,22 @@ VAR
   WhichScore: 1 .. NumberOfScores;
   Student: 1 .. ClassSize;
   NextScore: Score;
-  Ave, TotalScore, ClassTotal: INTEGER;
+  Ave, TotalScore, ClassTotal, ScoreValidation: INTEGER;
   FileOfName: TEXT;
   FatalError, IsNotName: BOOLEAN;
+PROCEDURE CopyText(VAR InF: TEXT; VAR OutF: TEXT);
+{Копирует строку с текущей позиции курсора в файле до пробела или конца строки}
+VAR
+  Ch: CHAR;
+BEGIN { CopyText }
+  REWRITE(OutF);
+  WHILE (NOT EOLN(InF)) AND (Ch <>  ' ')
+  DO
+    BEGIN
+      READ(InF, Ch);
+      WRITE(OutF, Ch)
+    END
+END; { CopyText }
 PROCEDURE CopyName(VAR InF: TEXT; VAR NameF: TEXT);
 VAR
   Ch: CHAR;
@@ -29,7 +42,7 @@ BEGIN { CopyName }
       WRITE(NameF, Ch);
       READ(InF, Ch)
     END;
-  WRITE(NameF, Ch)       
+  WRITELN(NameF, Ch)       
 END; { CopyName }
 PROCEDURE CheckName(VAR NameF: TEXT; VAR IsNotName: BOOLEAN);
 VAR
@@ -64,7 +77,12 @@ BEGIN {AverageScore}
         BEGIN
           IF NOT EOLN
           THEN
-            READ(NextScore)
+            READ(ScoreValidation)
+          ELSE
+            FatalError := TRUE;
+          IF (ScoreValidation >= 0) AND (ScoreValidation <= 100)
+          THEN
+            NextScore := ScoreValidation
           ELSE
             FatalError := TRUE;
           TotalScore := TotalScore + NextScore;
@@ -77,7 +95,8 @@ BEGIN {AverageScore}
           TotalScore := TotalScore * 10;
           Ave := TotalScore DIV NumberOfScores;
           {Вывод имени из FileOfName в OUTPUT}
-          CopyName(FileOfName, OUTPUT);
+          RESET(FileOfName);
+          CopyText(FileOfName, OUTPUT);
           IF Ave MOD 10 >= 5
           THEN
             WRITELN(Ave DIV 10 + 1)
