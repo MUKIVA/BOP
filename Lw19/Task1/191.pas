@@ -22,11 +22,11 @@ BEGIN {Prime}
              IF DelNum MOD CurrentNumber = 0 
              THEN
                BunchOfNumber := BunchOfNumber - [DelNum];
-             DelNum := DelNum + 1
+             DelNum := DelNum + CurrentNumber
            END;
          WRITE(CurrentNumber, ' ')  
        END;
-     DelNum := 2;
-     CurrentNumber := CurrentNumber + 1 
+     CurrentNumber := CurrentNumber + 1;
+     DelNum := CurrentNumber; 
    END
 END. {Prime}
