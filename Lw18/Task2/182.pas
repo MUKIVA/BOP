@@ -12,7 +12,7 @@ VAR
   FileOfName: TEXT;
   FatalError, IsNotName: BOOLEAN;
 PROCEDURE CopyText(VAR InF: TEXT; VAR OutF: TEXT);
-{Копирует строку с текущей позиции курсора в файле до пробела или конца строки}
+{РљРѕРїРёСЂСѓРµС‚ СЃС‚СЂРѕРєСѓ СЃ С‚РµРєСѓС‰РµР№ РїРѕР·РёС†РёРё РєСѓСЂСЃРѕСЂР° РёР· InF РІ OutF РґРѕ РїСЂРѕР±РµР»Р° РёР»Рё РєРѕРЅС†Р° СЃС‚СЂРѕРєРё}
 VAR
   Ch: CHAR;
 BEGIN { CopyText }
@@ -68,9 +68,9 @@ BEGIN {AverageScore}
     BEGIN
       TotalScore := 0;
       WhichScore := 1;
-      {Копирование из INP в FileOfName имени}
+      {ГЉГ®ГЇГЁГ°Г®ГўГ Г­ГЁГҐ ГЁГ§ INP Гў FileOfName ГЁГ¬ГҐГ­ГЁ}
       CopyName(INPUT, FileOfName);
-      {Проверка имени на корректность}
+      {ГЏГ°Г®ГўГҐГ°ГЄГ  ГЁГ¬ГҐГ­ГЁ Г­Г  ГЄГ®Г°Г°ГҐГЄГІГ­Г®Г±ГІГј}
       CheckName(FileOfName, IsNotName);
       WHILE (WhichScore <= NumberOfScores) AND NOT(FatalError) AND NOT(IsNotName)
       DO
@@ -94,7 +94,7 @@ BEGIN {AverageScore}
         BEGIN
           TotalScore := TotalScore * 10;
           Ave := TotalScore DIV NumberOfScores;
-          {Вывод имени из FileOfName в OUTPUT}
+          {Г‚Г»ГўГ®Г¤ ГЁГ¬ГҐГ­ГЁ ГЁГ§ FileOfName Гў OUTPUT}
           RESET(FileOfName);
           CopyText(FileOfName, OUTPUT);
           IF Ave MOD 10 >= 5
