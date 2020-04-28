@@ -7,6 +7,8 @@ TYPE
 VAR
   BunchOfNumber: Bunch;
   CurrentNumber, DelNum: INTEGER;
+  
+  
 PROCEDURE WriteBunch(VAR Bun: Bunch);
 VAR
   CurrNum: INTEGER;
@@ -21,12 +23,14 @@ BEGIN {WriteBunch}
       CurrNum := CurrNum + 1
     END
 END; {WriteBunch}  
+
+
 BEGIN {Prime}
  BunchOfNumber := [MinNum .. MaxNum];
- DelNum := 2;
- CurrentNumber := 2;
+ DelNum := MinNum;
+ CurrentNumber := MinNum;
  WRITE('Простые числа в диапазоне до 100 будут: ');
- WHILE CurrentNumber <= 10
+ WHILE CurrentNumber * CurrentNumber <= maxNum
  DO
    BEGIN 
      IF CurrentNumber IN BunchOfNumber
