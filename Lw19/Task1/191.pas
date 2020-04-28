@@ -7,8 +7,6 @@ TYPE
 VAR
   BunchOfNumber: Bunch;
   CurrentNumber, DelNum: INTEGER;
-  
-  
 PROCEDURE WriteBunch(VAR Bun: Bunch);
 VAR
   CurrNum: INTEGER;
@@ -23,8 +21,6 @@ BEGIN {WriteBunch}
       CurrNum := CurrNum + 1
     END
 END; {WriteBunch}  
-
-
 BEGIN {Prime}
  BunchOfNumber := [MinNum .. MaxNum];
  DelNum := MinNum;
