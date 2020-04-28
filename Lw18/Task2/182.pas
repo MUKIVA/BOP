@@ -2,8 +2,10 @@ PROGRAM AverageScore(INPUT, OUTPUT);
 CONST
   NumberOfScores = 4;
   ClassSize = 4;
+  MinScore = 0;
+  MaxScore = 100;
 TYPE
-  Score = 0 .. 100;
+  Score = MinScore .. MaxScore;
 VAR
   WhichScore: 1 .. NumberOfScores;
   Student: 1 .. ClassSize;
@@ -80,7 +82,7 @@ BEGIN {AverageScore}
             READ(ScoreValidation)
           ELSE
             FatalError := TRUE;
-          IF (ScoreValidation >= 0) AND (ScoreValidation <= 100)
+          IF (ScoreValidation >= MinScore) AND (ScoreValidation <= MaxScore)
           THEN
             NextScore := ScoreValidation
           ELSE
