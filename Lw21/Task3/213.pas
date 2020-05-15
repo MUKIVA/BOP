@@ -1,4 +1,4 @@
-PROGRAM Encryption(INPUT, OUTPUT);
+PROGRAM Decryption(INPUT, OUTPUT);
 {Переводит символы из INPUT в код согласно Chiper 
   и печатает новые символы в OUTPUT}
 CONST
@@ -56,15 +56,23 @@ VAR
   Index: 1 .. Len;
   FindChar: 'A' .. 'Z';
 BEGIN {Encode}
-  FOR Index := 1 TO Len
+  FOR Index := 1 TO StrLength
   DO
     IF S[Index] IN UsedChar
     THEN
       FOR FindChar := 'A' TO 'Z'
       DO
-        IF Code[FindChar] = S[Index]
-        THEN
-          WRITE(FindChar);
+        BEGIN
+          IF Code[FindChar] = S[Index]
+          THEN
+            WRITE(FindChar)
+        END
+    ELSE
+      IF S[Index] = '%'
+      THEN
+        WRITE(' ')
+      ELSE   
+        WRITE(S[Index]);
   WRITELN
 END;  {Encode}
  
@@ -90,7 +98,7 @@ BEGIN {Decryption}
       WRITELN;
       {распечатать кодированное сообщение}
       Encode(Msg);
-      WRITE('Длина строки:', StrLength)
+      WRITELN('Длина строки:', StrLength)
     END
 END.  {Decryption}
 

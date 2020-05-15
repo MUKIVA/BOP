@@ -22,13 +22,22 @@ VAR
 BEGIN {Initialize}
   ASSIGN(ChiperFile, 'Chiper.txt');
   RESET(ChiperFile);
+  FOR Ch1 := 'A' TO 'Z'
+  DO
+    Code[Ch1] := ' ';
   UsedChar := [];
   WHILE NOT EOF(ChiperFile)
   DO
     BEGIN
       IF NOT EOLN(ChiperFile)
       THEN
-        READ(ChiperFile, Ch1, Ch2, Ch3)
+        READ(ChiperFile, Ch1);
+      IF NOT EOLN(ChiperFile)
+      THEN
+        READ(ChiperFile, Ch2);
+      IF NOT EOLN(ChiperFile)
+      THEN
+        READ(ChiperFile, Ch3)
       ELSE
         BEGIN
           Error := TRUE;
@@ -55,15 +64,19 @@ PROCEDURE Encode(VAR S: Str);
 VAR
   Index: 1 .. Len;
 BEGIN {Encode}
-  FOR Index := 1 TO Len
+  FOR Index := 1 TO StrLength
   DO
     IF S[Index] IN ['A' .. 'Z']
     THEN
-      WRITE(Code[S[Index]])
+      IF (Code[S[Index]] = ' ')
+      THEN
+        WRITE(S[Index])
+      ELSE
+        WRITE(Code[S[Index]])
     ELSE
       IF S[Index] = ' '
       THEN
-          WRITE('%20')
+          WRITE('%')
         ELSE
           WRITE(S[Index]);
   WRITELN
@@ -90,7 +103,7 @@ BEGIN {Encryption}
       WRITELN;
       {распечатать кодированное сообщение}
       Encode(Msg);
-      WRITE('Длина строки:', StrLength)
+      WRITELN('Длина строки:', StrLength)
     END
 END.  {Encryption}
 
