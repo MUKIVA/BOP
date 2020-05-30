@@ -6,13 +6,11 @@ CONST
 TYPE
   Str = ARRAY [1 .. Len] OF 'A' .. 'Z';
   Chiper = ARRAY ['A' .. 'Z'] OF CHAR;
-  StrLen = 1 .. Len;
+  StrLen = 0 .. Len;
 VAR
   Msg: Str;
   Code: Chiper;
-  I: INTEGER;
-  StrLength: StrLen;
- 
+  I:StrLen;
 PROCEDURE Initialize(VAR Code: Chiper);
 {Присвоить Code шифр замены}
 BEGIN {Initialize}
@@ -77,13 +75,12 @@ BEGIN {Encryption}
           I := I + 1;
           READ(Msg[I]);
           WRITE(Msg[I]);
-          StrLength := I
         END;
       READLN;
       WRITELN;
       {распечатать кодированное сообщение}
-      Encode(Msg, StrLength);
-      WRITELN('Длина строки:', StrLength)
+      Encode(Msg, I);
+      WRITELN('Длина строки:', I)
     END
 END.  {Encryption}
 

@@ -6,11 +6,11 @@ CONST
 TYPE
   Str = ARRAY [1 .. Len] OF 'A' .. 'Z';
   Chiper = ARRAY ['A' .. 'Z'] OF CHAR;
+  StrLen = 0 .. Len;
 VAR
   Msg: Str;
   Code: Chiper;
-  I: 0 .. Len;
-  StrLength: 1 .. Len;
+  I: StrLen;
   Error: BOOLEAN;
  
 PROCEDURE Initialize(VAR Code: Chiper);
@@ -58,13 +58,12 @@ BEGIN {Initialize}
     END;
   CLOSE(ChiperFile)  
 END;  {Initialize}
-
-PROCEDURE Encode(VAR S: Str);
+  PROCEDURE Encode(VAR S: Str; Lenght: StrLen);
 {Выводит символы из Code, соответствующие символам из S}
 VAR
   Index: 1 .. Len;
 BEGIN {Encode}
-  FOR Index := 1 TO StrLength
+  FOR Index := 1 TO Lenght
   DO
     IF S[Index] IN ['A' .. 'Z']
     THEN
@@ -97,13 +96,12 @@ BEGIN {Encryption}
           I := I + 1;
           READ(Msg[I]);
           WRITE(Msg[I]);
-          StrLength := I
         END;
       READLN;
       WRITELN;
       {распечатать кодированное сообщение}
-      Encode(Msg);
-      WRITELN('Длина строки:', StrLength)
+      Encode(Msg, I);
+      WRITELN('Длина строки:', I)
     END
 END.  {Encryption}
 
