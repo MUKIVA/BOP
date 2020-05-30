@@ -66,8 +66,12 @@ END; {WriteMatrix}
 BEGIN {PseudoGraphic} 
   IF NOT EOLN
   THEN
-    READLN(Ch);
-  WriteMatrix(Ch)
+    BEGIN
+      READLN(Ch);
+      WriteMatrix(Ch)
+    END
+  ELSE
+    WRITELN('Пустая строка')
 END. {PseudoGraphic}
 
   
