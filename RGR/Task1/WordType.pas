@@ -6,12 +6,8 @@ TYPE
   WordString = STRING(MaxWordLenght);
   PROCEDURE GetWord(VAR FIn: TEXT; VAR StringOut: WordString); { Получение слова в виде строки }
 IMPLEMENTATION
-CONST
-  LowerRusChar = ['а' .. 'я'];
-  UpperRusChar = ['А' .. 'Я'];
-  UpperLatChar = ['A' .. 'Z'];
-  LowerLatChar = ['a' .. 'z'];
-  ValidCharSet = LowerRusChar + UpperRusChar + UpperLatChar + LowerLatChar + ['Ё', 'ё'];
+USES
+  ConstUnit;
 
   
   PROCEDURE CaseToLower(VAR Ch: CHAR);
@@ -24,27 +20,37 @@ CONST
       Ch := 'е' 
   END; { CaseToLower }
   
-  PROCEDURE NextWord(VAR FIn: TEXT);
+  PROCEDURE NextWord(VAR FIn: TEXT; VAR Ch: CHAR);
+  { Перемещает курсор на начало нового слова и считывает первый символ слова в Ch }
   BEGIN { NextWord }
-    WHILE (NOT (EOF(FIn))) AND (NOT (FIn^ IN ValidCharSet))
+    WHILE (NOT (EOF(FIn))) AND (NOT (Ch IN ValidCharSet))
     DO
-      GET(FIn)
+      READ(FIn, Ch)
   END; { NextWord }
 
   PROCEDURE GetWord(VAR FIn: TEXT; VAR StringOut: WordString);
+  { Копирует слово в строку до первого не входящего в ValidCharSet символа }
+  VAR
+    Ch: CHAR;
   BEGIN
-    NextWord(FIn);
+    NextWord(FIn, Ch);
     StringOut := '';
-    WHILE (NOT (EOF(FIn))) AND (FIn^ IN ValidCharSet)
+    WHILE (NOT (EOF(FIn))) AND (Ch IN ValidCharSet)
     DO
       BEGIN
         {Перевод символа в нижний регистр и смена ё на е}
-        CaseToLower(FIn^);
+        CaseToLower(Ch);
         {Сохранение символа в строке}
-        StringOut := StringOut + FIn^;
+        StringOut := StringOut + Ch;
         {Переход к следующему символу}
-        GET(FIn)      
-      END     
+        READ(FIn, Ch)      
+      END;
+    IF Ch IN ValidCharSet
+    THEN
+      BEGIN
+        CaseToLower(Ch);
+        StringOut := StringOut + Ch  
+      END 
   END;
   
 BEGIN { WordType }
