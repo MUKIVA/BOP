@@ -12,7 +12,7 @@ USES
   
   PROCEDURE CaseToLower(VAR Ch: CHAR);
   BEGIN { CaseToLower }
-    IF (Ch IN UpperRusChar) OR (Ch IN UpperLatChar)
+    IF (Ch IN UpperChar)
     THEN
       Ch := CHR(ORD(Ch) + 32);
     IF (Ch = '¨') OR (Ch = '¸')

@@ -1,11 +1,9 @@
 UNIT ConstUnit;
 INTERFACE
 CONST
-  LowerRusChar = ['à' .. 'ÿ'];
-  UpperRusChar = ['À' .. 'ß'];
-  UpperLatChar = ['A' .. 'Z'];
-  LowerLatChar = ['a' .. 'z'];
-  ValidCharSet = LowerRusChar + UpperRusChar + UpperLatChar + LowerLatChar + ['¨', '¸'];
+  LowerChar = ['à' .. 'ÿ', 'a' .. 'z', '¸'];
+  UpperChar = ['À' .. 'ß', 'A' .. 'Z', '¨'];
+  ValidCharSet = LowerChar + UpperChar;
   
 IMPLEMENTATION
 
